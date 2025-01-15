@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn.danger {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Inventory System</h1>
+    </header>
+    <div class="container">
+        <h2>Manage Inventory</h2>
+        <button class="btn" onclick="addItem()">Add Item</button>
+        <table id="inventoryTable">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added dynamically here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function addItem() {
+            const table = document.getElementById('inventoryTable').getElementsByTagName('tbody')[0];
+            const row = table.insertRow();
+
+            const nameCell = row.insertCell(0);
+            const quantityCell = row.insertCell(1);
+            const priceCell = row.insertCell(2);
+            const actionsCell = row.insertCell(3);
+
+            nameCell.contentEditable = true;
+            quantityCell.contentEditable = true;
+            priceCell.contentEditable = true;
+
+            actionsCell.innerHTML = `
+                <button class="btn danger" onclick="deleteRow(this)">Delete</button>
+            `;
+        }
+
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
